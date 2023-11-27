@@ -1,0 +1,16 @@
+.navbarContainer{
+    max-width: 100%;
+    padding: 3rem 5rem;
+    font-size: 1.6rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navContainer ul{
+    display: flex;
+    gap: 5rem;
+}
+
+.navbarContainer li{
+    list-style: none;
+}

@@ -1,0 +1,28 @@
+.heroContainer {
+  height: 100vh;
+  position: relative;
+}
+
+.heroImageContainer{
+  height: 50vh;
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 55.5%;
+  transform: translate(-50%, -50%);
+  align-items: flex-end;
+  gap: 1.5rem;
+}
+
+.heroImageContainer li{
+  list-style: none;
+  font-size: 1.6rem;
+}
+
+.heroArrow{
+  position: absolute;
+  top: 78%;
+  left: 64%;
+  transform: translate(-50%, -50%) rotate(210deg);
+}
+

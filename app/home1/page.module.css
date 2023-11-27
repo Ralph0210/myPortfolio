@@ -1,0 +1,17 @@
+.a{
+    height: 50vh;
+    overflow: hidden;
+    position: absolute;
+    top: 25vh;
+    left: 50vw;
+    object-fit: cover;
+    object-position: 50% 50%;
+    transform: translate(-50%);
+}
+
+.c {
+    position: relative;
+    /* height: 100%; */
+    width: 100vw;
+}
+
