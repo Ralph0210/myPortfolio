@@ -1,13 +1,13 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
-import hero from '../../../public/heroImages/heroMain.png'
-import hero1 from '../../../public/heroImages/animation_1-min.png'
-import hero2 from '../../../public/heroImages/animation_2-min.png'
-import hero3 from '../../../public/heroImages/animation_3-min.png'
-import hero4 from '../../../public/heroImages/animation_4-min.png'
-import hero5 from '../../../public/heroImages/animation_5-min.png'
-import hero6 from '../../../public/heroImages/animation_6-min.png'
+import hero from '../../../public/heroImages/hero.webp'
+import hero1 from '../../../public/heroImages/hero1.webp'
+import hero2 from '../../../public/heroImages/hero2.webp'
+import hero3 from '../../../public/heroImages/hero3.webp'
+import hero4 from '../../../public/heroImages/hero4.webp'
+import hero5 from '../../../public/heroImages/hero5.webp'
+import hero6 from '../../../public/heroImages/hero6.webp'
 import styles from './Hero.module.css'
 import { Icon } from '@iconify/react';
 
@@ -42,22 +42,26 @@ const Hero = () => {
     }, []);
   
     // Calculate the translateY based on the scroll position
-    const translateY = `translateY(${scrollPosition / 4}px)`;
+    const translateY = `translateY(${scrollPosition / 4+40}px)`;
 
   return (
+    <>
     <div className={styles.c}>
+      <div className={styles.d}>
       <div className={styles.a}>
-      <Image src={heroImages[currentImageIndex]} alt="hero" style={{height:"50vh", width:"auto", transform: translateY }} className={styles.b}/>
+      <Image src={heroImages[currentImageIndex]} alt="hero" style={{height:"auto", width:"100%", transform: translateY}} className={styles.b}/>
+      </div>
       <ul>
-          <li style={{color:"black"}}>Ralph Chang</li>
+          <li>Ralph Chang</li>
           <li>Designer & Developer</li>
         </ul>
-        
-      </div>
-      <div className={styles.heroArrow}>
-        <Icon icon="ph:arrow-up-light" style={{fontSize:"2.4rem"}}aria-label="Scroll down" />
+        </div>
+        <div className={styles.heroArrow}>
+        <Icon icon="ph:arrow-up-light" style={{fontSize:"2.4rem", transform:"rotate(210deg)"}}aria-label="Scroll down" />
         </div>
     </div>
+    
+    </>
   )
 }
 
