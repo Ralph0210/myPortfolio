@@ -4,10 +4,9 @@ import styles from "./page.module.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import './page.css'
-import { active } from "d3";
 gsap.registerPlugin(ScrollTrigger);
 
-const page = () => {
+const Page = () => {
   const boxRef = useRef(null);
   const boxRef2 = useRef(null);
   const tl = useRef()//store timeline in ref so it doesn't recreate when rerender
@@ -79,4 +78,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
