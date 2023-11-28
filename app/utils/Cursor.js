@@ -1,9 +1,12 @@
 'use client'
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { gsap } from 'gsap'
 import styles from '../components/Intro/Intro.module.css'
 
 const Cursor = () => {
+
+    const [cursortext, setCursorText] = useState('')
+    let scale = 1
 
     useEffect(() => {
         const cursor = document.querySelector('.custom-cursor')
@@ -20,20 +23,30 @@ const Cursor = () => {
         const onMouseEnterLink = (e) => {
             const link = e.target
             if(link.classList.contains(styles.view)){
-                console.log(true)
-                gsap.to(cursor, {scale:4})
+                scale = 4
+                gsap.to(cursor, {scale:scale})
                 cursorText.style.display = 'block'
-            }else{
-                console.log(false)
-                gsap.to(cursor, {scale:4})
+                setCursorText('click to flip')
+            }
+            else{
+                scale = 4
+                gsap.to(cursor, {scale: scale})
+                setCursorText('')
             }
         }
 
         const onMouseLeaveLink = (e) => {
-            gsap.to(cursor, {scale:1})
+            scale = 1
+            gsap.to(cursor, {scale:scale})
             cursorText.style.display = 'none'
         }
 
+        const onClick = () => {
+            gsap.to(cursor, { scale: scale * 0.8, duration: 0.1, onComplete: () => gsap.to(cursor, { scale: scale, duration: 0.1 }) });
+          };
+
+
+          document.addEventListener('click', onClick);
 
         document.addEventListener('mousemove', onMouseMove)
 
@@ -54,9 +67,10 @@ const Cursor = () => {
 
   return (
     <div id='custom-cursor' className='custom-cursor'>
-        <span className='cursor-text'>view tools</span>
+        <span className='cursor-text'>{cursortext}</span>
     </div>
   )
 }
 
 export default Cursor
+

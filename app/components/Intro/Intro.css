@@ -1,12 +1,4 @@
-.red{
-    background-color: rebeccapurple;
-}
-
-.name{
-    transform: translateY(100px);
-}
-
-.box{
+.aboutMeText{
     padding-left: 20%;
     padding-right: 20%;
     /* height: auto; */
@@ -27,4 +19,5 @@ span.char{
     font-size: 4.8rem;
 font-style: normal;
 font-weight: 400;
+color: var(--background-color);
 }

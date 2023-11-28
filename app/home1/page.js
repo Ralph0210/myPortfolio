@@ -4,12 +4,19 @@ import styles from "./page.module.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import './page.css'
+import SplitType from "split-type";
 gsap.registerPlugin(ScrollTrigger);
 
 const Page = () => {
+  const nameRef = useRef(null)
   const boxRef = useRef(null);
   const boxRef2 = useRef(null);
   const tl = useRef()//store timeline in ref so it doesn't recreate when rerender
+
+  const text = 'I am passionate about using technology for meaningful change. I create engaging, delightful, user-centric experiences that empower organizations committed to social responsibility and sustainability.'
+  useEffect(() => {
+    const myNameText = SplitType.create('#myName');
+  })
 
   useLayoutEffect(() => {
     let ctx = gsap.context(() => {
@@ -28,12 +35,12 @@ const Page = () => {
         //numeric value means how many seconds of smoothing
         pin: boxRef.current,
         pinSpacing: true,
-        markers: {
-          startColor: "blue",
-          endColor: "red",
-          fontSize: "2rem",
-          indent: 20
-        }
+        // markers: {
+        //   startColor: "blue",
+        //   endColor: "red",
+        //   fontSize: "2rem",
+        //   indent: 20
+        // }
       },
     });})
     return () => ctx.revert();
@@ -45,7 +52,7 @@ const Page = () => {
       .timeline(
         {scrollTrigger:{
         trigger: boxRef.current,
-        markers: true,
+        // markers: true,
         start: "top 80%",
         end: "top 30%",
         scrub: 2,
@@ -63,16 +70,54 @@ const Page = () => {
     return () => ctx.revert()
   }, [])
 
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.to(nameRef.current, {
+        y: 0,
+        duration: 2,
+      })
+
+    })
+
+    return () => ctx.revert()
+  }, [])
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.to('.char', {
+        opacity:1,
+        stagger: 0.1,
+        duration: 0.1,
+        scrollTrigger: {
+          trigger: nameRef.current,
+          start: "top 80%",
+          end: "top 30%",
+          markers:true,
+          scrub: 2,
+        }
+      })
+
+    }, nameRef.current)
+
+    return () => ctx.revert()
+  }, [])
+
 
   return (
     <>
-      {/* <div className={styles.div1}></div>
-      <div className={styles.div2}>
+      <div className={styles.div1}></div>
+      {/* <div className={styles.div2}>
         <div ref={boxRef} className={styles.box}></div>
         <div ref={boxRef2} className={styles.box2}></div>
       </div> */}
-      <div className={styles.panel1}></div>
-      <div ref={boxRef} className={styles.box}></div>
+      {/* <div className={styles.panel1}></div> */}
+      {/* <div ref={boxRef} className={styles.box}></div> */}
+      <div ref={nameRef} className="box">
+      {/* <p ref={nameRef} className='name' style={{fontSize:"2rem"}}>hello I am Ralph</p> */}
+      {text.split(" ").map((char, index) => (
+        <span className="char" key={index} >{char}</span>
+      ))}
+      </div>
       <div className={styles.panel2}></div>
     </>
   );

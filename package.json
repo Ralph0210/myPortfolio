@@ -18,7 +18,8 @@
     "react-dom": "^18",
     "react-parallax": "^3.5.1",
     "react-scroll-parallax": "^3.4.5",
-    "rellax": "^1.12.1"
+    "rellax": "^1.12.1",
+    "split-type": "^0.3.4"
   },
   "devDependencies": {
     "@iconify/react": "^4.1.1",
