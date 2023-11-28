@@ -6,7 +6,8 @@ import { motion, useInView } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Work from "../Work/Work";
-import './Intro.css'
+import "./Intro.css";
+import { Icon } from "@iconify/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,27 +23,28 @@ const abilityCard = [
     title: "Web Design",
     description:
       "I design and develop user centered digital products, ecommerce and brand communication solutions.",
-    tools: ["Figma", "Photoshop"],
+    services: ["Figma", "Photoshop"],
   },
   {
     title: "Web Development",
     description:
       "I design and develop user centered digital products, ecommerce and brand communication solutions.",
-    tools: ["Figma", "Photoshop"],
+      services: ["Figma", "Photoshop"],
   },
   {
     title: "Branding",
     description:
       "I design and develop user centered digital products, ecommerce and brand communication solutions.",
-    tools: ["Figma", "Photoshop"],
+      services: ["Figma", "Photoshop"],
   },
 ];
 
 const Intro = ({ ThemeDark, changeThemeRef, changeThemeRef3 }) => {
-  const aboutMeText = 'I am passionate about using technology for meaningful change. I create engaging, delightful, user-centric experiences that empower organizations committed to social responsibility and sustainability.'
+  const aboutMeText =
+    "I am passionate about using technology for meaningful change. I create engaging, delightful, user-centric experiences that empower organizations committed to social responsibility and sustainability.";
   const [isFlipped, setIsFlipped] = useState([false, false, false, false]);
-  const textRef = useRef()
-  const helloRef = useRef()
+  const textRef = useRef();
+  const helloRef = useRef();
 
   const handleCardClick = (index) => {
     setIsFlipped((prevState) => {
@@ -108,7 +110,7 @@ const Intro = ({ ThemeDark, changeThemeRef, changeThemeRef3 }) => {
         scrollTrigger: {
           trigger: changeThemeRef3.current,
           start: "top top",
-          end: "bottom top",
+          end: "bottom 30%",
           pin: true,
           pinSpacing: true,
           // markers:true,
@@ -122,8 +124,8 @@ const Intro = ({ ThemeDark, changeThemeRef, changeThemeRef3 }) => {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.to('.char', {
-        opacity:1,
+      gsap.to(".char", {
+        opacity: 1,
         stagger: 0.1,
         duration: 0.1,
         scrollTrigger: {
@@ -131,16 +133,32 @@ const Intro = ({ ThemeDark, changeThemeRef, changeThemeRef3 }) => {
           start: "top center",
           end: "top 20%",
           // markers:true,
-          scrub: 2,
-          toggleActions:"complete complete complete complete",
-        }
-      })
+          scrub: 4,
+          toggleActions: "complete complete complete complete",
+        },
+      });
+    }, textRef.current);
 
-    }, textRef.current)
+    return () => ctx.revert();
+  }, []);
 
-    return () => ctx.revert()
-  }, [])
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.to(helloRef.current, {
+        opacity: 1,
+        scrollTrigger: {
+          trigger: helloRef.current,
+          start: "top center",
+          end: "top 20%",
+          // markers:true,
+          scrub: 4,
+          toggleActions: "complete complete complete complete",
+        },
+      });
+    });
 
+    return () => ctx.revert();
+  }, []);
 
   return (
     <div className={styles.introContainer}>
@@ -153,7 +171,7 @@ const Intro = ({ ThemeDark, changeThemeRef, changeThemeRef3 }) => {
           {galleryTop.map((item, index) => {
             return (
               <div
-                key={index}
+              key={`galleryTop-${index}`}
                 className={styles.galleryItem}
                 style={{ backgroundColor: item.backgroundColor }}
               >
@@ -180,7 +198,7 @@ const Intro = ({ ThemeDark, changeThemeRef, changeThemeRef3 }) => {
           {galleryTop.map((item, index) => {
             return (
               <div
-                key={index}
+              key={`galleryBottom-${index}`}
                 className={styles.galleryItem}
                 style={{ backgroundColor: item.backgroundColor }}
               >
@@ -198,14 +216,27 @@ const Intro = ({ ThemeDark, changeThemeRef, changeThemeRef3 }) => {
       </div>
 
       <div ref={changeThemeRef3} className={styles.aboutMeContainer}>
-        <p ref={helloRef} className={styles.hello}>HELLO THERE</p>
-        <div ref={textRef} className='aboutMeText'>
-        {aboutMeText.split(" ").map((char, index) => (
-        <span className="char" key={index} >{char}</span>
-      ))}
+        <p ref={helloRef} className={styles.hello}>
+          HELLO THERE
+        </p>
+        <div ref={textRef} className="aboutMeText">
+          {aboutMeText.split(" ").map((char, index) => (
+            <span className="char" key={index}>
+              {char}
+            </span>
+          ))}
         </div>
+        <p ref={helloRef} className={styles.place}>Currently Living in Austin, TX</p>
 
         <div ref={abilityDeckRef} className={styles.abilityDeckContainer}>
+          <div className={styles.heroArrow}>
+            <Icon
+              className={ThemeDark ? styles.inView : ""}
+              icon="ph:arrow-up-light"
+              style={{ fontSize: "2.4rem", transform: "rotate(120deg)" }}
+              aria-label="Scroll down"
+            />
+          </div>
           {abilityCard.map((item, index) => {
             return (
               <div
@@ -223,15 +254,21 @@ const Intro = ({ ThemeDark, changeThemeRef, changeThemeRef3 }) => {
                     </p>
                   </div>
                   <div className={styles.abilityCardBack}>
-                    <p className={styles.abilityTools}>
-                      Tools: {item.tools.join(", ")}
-                    </p>
+                    <p className={styles.abilityService}>I can help you with...</p>
+                    <div className={styles.servicesContainer}>
+                    {item.services.map((service, index) => (<div key={index} style={{paddingBottom:"10px"}}><p className={styles.services}>{service}</p><div className={styles.divider}></div></div>))}
+                    </div>
                   </div>
                 </div>
               </div>
             );
           })}
-          <div className={styles.abilityCard}>about me or keep scrolling</div>
+          <div className={`${styles.abilityCard} ${styles.go}`}>
+            <p className={styles.abilityTitle}>More About Me</p>
+            <p className={styles.abilityDescription}>
+                      Check out my about page
+                    </p>
+          </div>
         </div>
       </div>
       {/* <Work /> */}

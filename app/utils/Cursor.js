@@ -2,10 +2,11 @@
 import React, { useState, useEffect } from 'react'
 import { gsap } from 'gsap'
 import styles from '../components/Intro/Intro.module.css'
+import { Icon } from "@iconify/react";
 
 const Cursor = () => {
 
-    const [cursortext, setCursorText] = useState('')
+    const [cursortext, setCursorText] = useState()
     let scale = 1
 
     useEffect(() => {
@@ -27,7 +28,16 @@ const Cursor = () => {
                 gsap.to(cursor, {scale:scale})
                 cursorText.style.display = 'block'
                 setCursorText('click to flip')
-            }
+            } else if(link.classList.contains(styles.go)){
+                scale = 4
+                gsap.to(cursor, {scale:scale})
+                cursorText.style.display = 'block'
+                setCursorText(<Icon
+                    icon="ph:arrow-up-light"
+                    style={{ fontSize: "1rem", transform: "rotate(45deg)" }}
+                    aria-label="Scroll down"
+                />)
+            } 
             else{
                 scale = 4
                 gsap.to(cursor, {scale: scale})
