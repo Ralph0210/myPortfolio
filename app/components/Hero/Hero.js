@@ -11,14 +11,14 @@ import hero6 from '../../../public/heroImages/hero6.webp'
 import styles from './Hero.module.css'
 import { Icon } from '@iconify/react';
 
-const Hero = () => {
+const Hero = ({ThemeDark}) => {
     const heroImages = [hero, hero1, hero2, hero3, hero4, hero5, hero6];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length);
-    }, currentImageIndex === 0 ? 3000 : 300);
+    }, currentImageIndex === 0 ? 3000 : 150);
 
     return () => clearInterval(intervalId);
   }, [currentImageIndex]);
@@ -51,13 +51,13 @@ const Hero = () => {
       <div className={styles.a}>
       <Image src={heroImages[currentImageIndex]} alt="hero" style={{height:"auto", width:"100%", transform: translateY}} className={styles.b}/>
       </div>
-      <ul>
+      <ul className={ ThemeDark ? styles.inView : ''}>
           <li>Ralph Chang</li>
           <li>Designer & Developer</li>
         </ul>
         </div>
-        <div className={styles.heroArrow}>
-        <Icon icon="ph:arrow-up-light" style={{fontSize:"2.4rem", transform:"rotate(210deg)"}}aria-label="Scroll down" />
+        <div className={styles.heroArrow} >
+        <Icon className={ThemeDark ? styles.inView : ''} icon="ph:arrow-up-light" style={{fontSize:"2.4rem", transform:"rotate(210deg)"}}aria-label="Scroll down" />
         </div>
     </div>
     

@@ -22,12 +22,13 @@
 .c {
     position: relative;
     min-height: calc(100vh - 8rem);
-    width: 100vw;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     /* align-items: center; */
     gap: 2.5rem;
+    z-index: 2;
 }
 
 .d li {
@@ -35,6 +36,12 @@
   font-size: 1.6rem;
 }
 
+.inView{
+    color: var(--background-color);
+    fill: var(--background-color);
+    transition: 0.8s ease-in-out;
+}
+
 .heroArrow{
-    margin-left: 63.5vw;
+    padding-left: 63.5vw;
 }
