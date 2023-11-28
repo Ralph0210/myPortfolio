@@ -49,7 +49,7 @@ const Hero = ({ThemeDark}) => {
     <div className={styles.c}>
       <div className={styles.d}>
       <div className={styles.a}>
-      <Image src={heroImages[currentImageIndex]} alt="hero" style={{height:"auto", width:"100%", transform: translateY}} className={styles.b}/>
+      <Image src={hero} alt="hero" style={{height:"auto", width:"100%", transform: translateY}} className={styles.b}/>
       </div>
       <ul className={ ThemeDark ? styles.inView : ''}>
           <li>Ralph Chang</li>

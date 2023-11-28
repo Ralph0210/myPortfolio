@@ -146,7 +146,7 @@ const Intro = ({ ThemeDark, changeThemeRef, changeThemeRef3}) => {
             <div ref={abilityDeckRef} className={styles.abilityDeckContainer}>
               {abilityCard.map((item, index) => {
                 return (
-                  <div key={index} className={styles.abilityCard}>
+                  <div key={index} className={`${styles.abilityCard} ${styles.view}`}>
                     <p className={styles.abilityTitle}>{item.title}</p>
                     <p className={styles.abilityDescription}>{item.description}</p>
                     {/* <p className={styles.abilityTools}>Tools: {item.tools.join(", ")}</p> */}
