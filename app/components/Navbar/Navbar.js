@@ -12,13 +12,13 @@ function Navbar() {
         <nav>
           <ul>
             <li>
-              <Link href='/work'>Work</Link>
+              <Link href='/work'>Work<div className={styles.bounds}></div></Link>
             </li>
             <li>
-              <Link href='/about'>About</Link>
+              <Link href='/about'>About<div className={styles.bounds}></div></Link>
             </li>
             <li>
-              <Link href='/contact'>Contact</Link>
+              <Link href='/contact'>Contact<div className={styles.bounds}></div></Link>
             </li>
           </ul>
         </nav>

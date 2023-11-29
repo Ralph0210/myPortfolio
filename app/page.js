@@ -11,8 +11,10 @@ import Intro from './components/Intro/Intro';
 import Work from './components/Work/Work';
 import Footer from './components/Footer/Footer';
 import { useInView } from 'framer-motion';
+import Cursor from './utils/Cursor';
 
 export default function Home() {
+  
   const arrowRef = useRef();
   const changeThemeRef = useRef(null)
   const isInView = useInView(changeThemeRef)

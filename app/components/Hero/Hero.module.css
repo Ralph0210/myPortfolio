@@ -2,14 +2,11 @@
     height: calc(23.8vw/4*6);
     width: 23.8vw;
     overflow: hidden;
-    /* position: absolute; */
-    /* top: 18vh; */
-    /* left: 50%; */
     object-fit: cover;
-    /* transform: translate(-50%); */
     display: flex;
     align-items: flex-end;
     gap: 1.5rem;
+    position: relative;
 }
 
 .d{

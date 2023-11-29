@@ -14,7 +14,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Cursor />
+      <Cursor/>
       <body className={microsoftSansSerif.className}>{children}</body>
     </html>
   )
