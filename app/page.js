@@ -23,6 +23,9 @@ export default function Home() {
   const changeThemeRef3 = useRef(null)
   const isInView3 = useInView(changeThemeRef3)
   const [ThemeDark, setThemeDark] = useState(false)
+  
+  const footerStick = useRef(null)
+  const isInView4 = useInView(footerStick)
 
   useEffect(() => {
     if (isInView || isInView2 || isInView3 === true) {
@@ -30,7 +33,7 @@ export default function Home() {
     }else{
       setThemeDark(false)
     }
-  }, [isInView, isInView2])
+  }, [isInView, isInView2, isInView3])
 
   useEffect(() => {
     (
@@ -43,12 +46,13 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
+      <Cursor/>
       {/* <div className={styles.heroContainer}> */}
       <Navbar />
       <Hero ThemeDark={ThemeDark}/>
       <Intro ThemeDark={ThemeDark} changeThemeRef={changeThemeRef} changeThemeRef3={changeThemeRef3}/>
-      <Work changeThemeRef2={changeThemeRef2} />
-      <Footer />
+      <Work changeThemeRef2={changeThemeRef2} footerStick={footerStick}/>
+      <Footer isInView4={isInView4}/>
     </main>
   )
 }

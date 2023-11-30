@@ -2,19 +2,13 @@
 import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import Image from "next/image";
 import hero from "../../../public/heroImages/hero.webp";
-import hero1 from "../../../public/heroImages/hero1.webp";
-import hero2 from "../../../public/heroImages/hero2.webp";
-import hero3 from "../../../public/heroImages/hero3.webp";
-import hero4 from "../../../public/heroImages/hero4.webp";
-import hero5 from "../../../public/heroImages/hero5.webp";
-import hero6 from "../../../public/heroImages/hero6.webp";
 import styles from "./Hero.module.css";
 import { Icon } from "@iconify/react";
 import SplitType from "split-type";
 import gsap from "gsap";
 
 const Hero = ({ ThemeDark }) => {
-  const heroImages = [hero, hero1, hero2, hero3, hero4, hero5, hero6];
+  // const heroImages = [hero, hero1, hero2, hero3, hero4, hero5, hero6];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const myNameRef = useRef();
 

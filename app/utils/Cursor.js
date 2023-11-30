@@ -1,25 +1,35 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { gsap } from "gsap";
-import styles from "../components/Intro/Intro.module.css";
+import styles from './Cursor.module.css'
+import stylesIntro from "../components/Intro/Intro.module.css";
 import styles2 from "../components/Work/Work.module.css";
 import stylesNav from "../components/Navbar/Navbar.module.css";
+import stylesFooter from "../components/Footer/Footer.module.css";
 import { Icon } from "@iconify/react";
 
 const Cursor = ({ cardRef }) => {
+  
   const [isHoveredButton, setIsHoveredButton] = useState(false);
+  const [isHoveredAboutMeCard, setIsHoveredAboutMeCard] = useState(false);
   const [isHoveredNavButton, setIsHoveredNavButton] = useState(false);
   const [isHoveredCard, setIsHoveredCard] = useState(false);
   const [isHoveredWork, setIsHoveredWork] = useState(false);
+  const [isHoveredArrow, setIsHoveredArrow] = useState(false);
+  const [isHoveredContactsCard, setIsHoveredContactsCard] = useState(false);
+  const [isCopied, setIsCopied] = useState(false)
   const [cursortext, setCursorText] = useState();
   let scale = 1;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const cursor = document.querySelector(".custom-cursor");
-    const cards = document.querySelectorAll(`.${styles.abilityCard}`);
+    const cards = document.querySelectorAll(`.${stylesIntro.abilityCard}`);
+    const aboutMeCard = document.querySelector(`.${stylesIntro.aboutMeCard}`);
     const works = document.querySelectorAll(`.${styles2.workCard}`);
     const buttons = document.querySelectorAll(`.${styles2.bounds}`);
     const navButtons = document.querySelectorAll(`.${stylesNav.bounds}`);
+    const footerButtons = document.querySelectorAll(`.${stylesFooter.bounds}`);
+    const footerContactsCard = document.querySelectorAll(`.${stylesFooter.contactsCard}`)
     const cursorText = document.querySelector(".cursor-text");
 
     const cursorSize = 20;
@@ -30,7 +40,8 @@ const Cursor = ({ cardRef }) => {
 
       if (
         (isHoveredButton && e.target.classList.contains(styles2.bounds)) ||
-        (isHoveredNavButton && e.target.classList.contains(stylesNav.bounds))
+        (isHoveredNavButton && e.target.classList.contains(stylesNav.bounds)) ||
+        (isHoveredArrow && e.target.classList.contains(stylesFooter.bounds))
       ) {
         const button = e.target;
 
@@ -59,6 +70,20 @@ const Cursor = ({ cardRef }) => {
         });
         cursorText.style.display = "block";
         setCursorText("click to flip");
+      } else if (isHoveredAboutMeCard) {
+        const card = e.target;
+        scale = 4;
+        gsap.to(cursor, {
+          scale: scale,
+          x: clientX - cursorSize / 2,
+          y: clientY - cursorSize / 2,
+        });
+        cursorText.style.display = "block";
+        setCursorText(<Icon
+            className={styles.arrow}
+            icon="ph:arrow-up-light"
+            aria-label="Scroll down"
+          />);
       } else if (isHoveredWork) {
         scale = 4;
         gsap.to(cursor, {
@@ -69,7 +94,27 @@ const Cursor = ({ cardRef }) => {
         });
         cursorText.style.display = "block";
         setCursorText("view case");
-      } else {
+      } else if (isHoveredContactsCard && !isCopied) {
+        scale = 4;
+        gsap.to(cursor, {
+          scale: scale,
+          x: clientX - cursorSize / 2,
+          y: clientY - cursorSize / 2,
+        //   mixBlendMode:"exclusion",
+        });
+        cursorText.style.display = "block";
+        setCursorText("click to copy");
+      }else if (isHoveredContactsCard && isCopied) {
+        scale = 4;
+        gsap.to(cursor, {
+          scale: scale,
+          x: clientX - cursorSize / 2,
+          y: clientY - cursorSize / 2,
+        //   mixBlendMode:"exclusion",
+        });
+        cursorText.style.display = "block";
+        setCursorText("copied");
+      }else {
         gsap.to(cursor, {
           scale: 1,
           width: 20,
@@ -80,6 +125,7 @@ const Cursor = ({ cardRef }) => {
           mixBlendMode:"difference",
         });
         cursorText.style.display = "none";
+        setCursorText('')
       }
     };
 
@@ -115,12 +161,42 @@ const Cursor = ({ cardRef }) => {
       setIsHoveredNavButton(false);
     };
 
+    const onMouseEnterArrow = (e) => {
+        setIsHoveredArrow(true);
+    }
+
+    const onMouseLeaveArrow = (e) => {
+        setIsHoveredArrow(false);
+    }
+
+    const onMouseEnterContactsCard = (e) => {
+        setIsHoveredContactsCard(true);
+    }
+
+    const onMouseLeaveContactsCard = (e) => {
+        setIsHoveredContactsCard(false);
+        setIsCopied(false)
+    }
+
+    const onMouseEnterAboutMeCard = (e) => {
+        setIsHoveredAboutMeCard(true);
+    }
+
+    const onMouseLeaveAboutMeCard = (e) => {
+        setIsHoveredAboutMeCard(false);
+    }
+
     const onClick = () => {
       gsap.to(cursor, {
         scale: scale * 0.8,
         duration: 0.1,
         onComplete: () => gsap.to(cursor, { scale: scale, duration: 0.1 }),
       });
+
+      if (isHoveredContactsCard){
+        setCursorText("copied");
+        setIsCopied(true)
+      }
     };
 
     document.addEventListener("click", onClick);
@@ -145,8 +221,25 @@ const Cursor = ({ cardRef }) => {
       button.addEventListener("mouseleave", onMouseLeaveNavButton);
     });
 
+    footerButtons.forEach((button) => {
+        button.addEventListener("mouseenter", onMouseEnterArrow);
+      button.addEventListener("mouseleave", onMouseLeaveArrow);
+    })
+
+    footerContactsCard.forEach((button) => {
+        button.addEventListener("mouseenter", onMouseEnterContactsCard);
+      button.addEventListener("mouseleave", onMouseLeaveContactsCard);
+    })
+
+    if(aboutMeCard){
+        aboutMeCard.addEventListener("mouseenter", onMouseEnterAboutMeCard);
+      aboutMeCard.addEventListener("mouseleave", onMouseLeaveAboutMeCard);
+    }
+
     document.addEventListener("mousemove", onMouseMove);
+
     return () => {
+        // router.events.off('routeChangeStart', handleRouteChange);
       document.removeEventListener("click", onClick);
       works.forEach((work) => {
         work.removeEventListener("mouseenter", onMouseEnterWorks);
@@ -158,16 +251,28 @@ const Cursor = ({ cardRef }) => {
         link.removeEventListener("mouseleave", onMouseLeaveCard);
       });
       buttons.forEach((button) => {
-        button.addEventListener("mouseenter", onMouseEnterButton);
-        button.addEventListener("mouseleave", onMouseLeaveButton);
+        button.removeEventListener("mouseenter", onMouseEnterButton);
+        button.removeEventListener("mouseleave", onMouseLeaveButton);
       });
 
       navButtons.forEach((button) => {
-        button.addEventListener("mouseenter", onMouseEnterNavButton);
-        button.addEventListener("mouseleave", onMouseLeaveNavButton);
+        button.removeEventListener("mouseenter", onMouseEnterNavButton);
+        button.removeEventListener("mouseleave", onMouseLeaveNavButton);
       });
+      footerButtons.forEach((button) => {
+        button.removeEventListener("mouseenter", onMouseEnterArrow);
+      button.removeEventListener("mouseleave", onMouseLeaveArrow);
+    })
+    footerContactsCard.forEach((button) => {
+        button.removeEventListener("mouseenter", onMouseEnterContactsCard);
+      button.removeEventListener("mouseleave", onMouseLeaveContactsCard);
+    })
+  
+    if(aboutMeCard){
+        aboutMeCard.removeEventListener("mouseenter", onMouseEnterAboutMeCard);
+        aboutMeCard.removeEventListener("mouseleave", onMouseLeaveAboutMeCard);}
     };
-  }, [isHoveredButton, isHoveredNavButton, isHoveredCard, isHoveredWork]);
+  }, [isHoveredButton,isHoveredAboutMeCard, isHoveredNavButton, isHoveredCard, isHoveredWork, isHoveredArrow, isHoveredContactsCard, isCopied]);
 
   return (
     <div id="custom-cursor" className="custom-cursor">

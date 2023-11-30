@@ -77,7 +77,7 @@
 }
 
 .description {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   padding-top: 1rem;
   width: 65%;
 }
@@ -87,13 +87,25 @@
 
 .moreWork {
   font-size: 2rem;
-  padding: 3rem 8rem;
+  /* padding: 3rem 8rem; */
+  width: 26rem;
+  height: 9rem;
   border-radius: 5rem;
   border: 1px solid var(--underline-color);
   transition: border 0.8s;
   align-self: center;
   position: relative;
   z-index: 2;
+  
+}
+
+.moreWork span{
+  position:absolute;
+  display: inline-block;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: max-content;
 }
 
 .moreWork:hover {
@@ -123,4 +135,23 @@
 
 .bounds:hover{
     transform: scale(3);
+}
+
+.moreWork:hover span{
+  animation: letterroll cubic-bezier(.4,0,.2,1) 0.3s;
+  /* transform: translateX(-50%); */
+}
+
+@keyframes letterroll {
+  50% {
+    transform: translate(-50%, -75%);
+    opacity: 0;
+  }
+  50.1% {
+    transform: translate(-50%, 75%);
+  }
+  100% {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
 }

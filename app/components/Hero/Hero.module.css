@@ -26,6 +26,7 @@
     /* align-items: center; */
     gap: 2.5rem;
     z-index: 2;
+    /* background-color: var(--background-color); */
 }
 
 .d li {

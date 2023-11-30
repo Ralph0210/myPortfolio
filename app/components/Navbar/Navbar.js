@@ -1,30 +1,52 @@
-import React from 'react'
-import styles from './Navbar.module.css'
-import Link from 'next/link'
+import React, { useLayoutEffect } from "react";
+import styles from "./Navbar.module.css";
+import Link from "next/link";
+import { gsap } from "gsap";
 
 function Navbar() {
+  useLayoutEffect(() => {});
   return (
     <div className={styles.navbarContainer}>
       <div className={styles.homeLinkContainer}>
-        <p>© Coded by Ralph</p>
+        <Link href="/">
+          <p className={styles.copyright}>©</p>
+
+          <div className={styles.name}>
+            <p className={styles.codeBy}>Code by</p>
+
+            <p className={styles.ralph}>Ralph</p>
+
+            <p className={styles.chang}>Chang</p>
+          </div>
+          <div className={styles.bounds}></div>
+        </Link>
       </div>
       <div className={styles.navContainer}>
         <nav>
           <ul>
             <li>
-              <Link href='/work'>Work<div className={styles.bounds}></div></Link>
+              <Link href="/work">
+                <span>Work</span>
+                <div className={styles.bounds}></div>
+              </Link>
             </li>
             <li>
-              <Link href='/about'>About<div className={styles.bounds}></div></Link>
+              <Link href="/about">
+                <span>About</span>
+                <div className={styles.bounds}></div>
+              </Link>
             </li>
             <li>
-              <Link href='/contact'>Contact<div className={styles.bounds}></div></Link>
+              <Link href="/contact">
+                <span>Contact</span>
+                <div className={styles.bounds}></div>
+              </Link>
             </li>
           </ul>
         </nav>
       </div>
     </div>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;

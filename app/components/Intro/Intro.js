@@ -8,6 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Work from "../Work/Work";
 import "./Intro.css";
 import { Icon } from "@iconify/react";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -199,7 +200,15 @@ const Intro = ({ ThemeDark, changeThemeRef, changeThemeRef3 }) => {
         </div>
         <div
           className={styles.themeChangeCircle}
-          style={ThemeDark ? { width: "500rem", height: "500rem" } : {}}
+          style={ThemeDark ? { width: "500rem", height: "500rem", opacity: 1 } : {opacity:0}}
+        ></div>
+        <div
+          className={styles.themeChangeCircle2}
+          style={ThemeDark ? { width: "500rem", height: "500rem", opacity: 1 } : {opacity:0}}
+        ></div>
+        <div
+          className={styles.themeChangeCircle3}
+          style={ThemeDark ? { width: "500rem", height: "500rem", opacity: 1 } : {opacity:0}}
         ></div>
         <div
           ref={changeThemeRef}
@@ -283,10 +292,10 @@ const Intro = ({ ThemeDark, changeThemeRef, changeThemeRef3 }) => {
               </div>
             );
           })}
-          <div className={`${styles.abilityCard} ${styles.go}`}>
+          <Link href='/about' className={`${styles.aboutMeCard} ${styles.go}`}>
             <p className={styles.abilityTitle}>More About Me</p>
-            <p className={styles.abilityDescription}>Check out my about page and see what tools I use</p>
-          </div>
+            <p className={styles.abilityDescription}>Check out my about page and see what tools I use.</p>
+          </Link>
         </div>
       </div>
       {/* <Work /> */}

@@ -21,9 +21,9 @@ const LargeWorkCard = ({
     <div onMouseEnter={onMouseEnter}
     onMouseLeave={onMouseLeave}
     style={{ opacity: hoveredAtAll !== null ? (isHovered ? 1 : 0.4) : 1, transition: "opacity 0.3s ease-in-out", height:"auto" }} >
+      <Link href={`/work/${title.toLowerCase().replaceAll(" ", "-")}-2023`} className={styles.link}>
       <div
         className={`${styles.largeImageContainer} ${styles.workCard}`}
-        
       >
         <Image
           draggable={false}
@@ -33,6 +33,7 @@ const LargeWorkCard = ({
           style={{ objectFit: "cover", objectPosition: "left" }}
         />
       </div>
+      </Link>
       <div className={styles.textContainer}>
         <div className={styles.titleContainer}>
           <p className={styles.title}>{title}</p>
@@ -62,6 +63,7 @@ const SmallWorkCard = ({
     <div onMouseEnter={onMouseEnter}
     onMouseLeave={onMouseLeave}
     style={{ opacity: hoveredAtAll !== null ? (isHovered ? 1 : 0.4) : 1, transition: "opacity 0.3s ease-in-out", height:"min-content" }} >
+                    <Link href={`/work/${title.toLowerCase().replaceAll(" ", "-")}-2023`} className={styles.link}>
       <div
         className={`${styles.smallImageContainer} ${styles.workCard}`}
       >
@@ -73,6 +75,7 @@ const SmallWorkCard = ({
           style={{ objectFit: "cover", objectPosition: "left" }}
         />
       </div>
+      </Link>
       <div className={styles.textContainer}>
         <div className={styles.titleContainer}>
           <p className={styles.title}>{title}</p>
@@ -88,7 +91,7 @@ const SmallWorkCard = ({
   );
 };
 
-const Work = ({ changeThemeRef2 }) => {
+const Work = ({ changeThemeRef2, footerStick }) => {
   const [hoveredCard, setHoveredCard] = useState(null);
 
   const handleMouseEnter = (cardIndex) => {
@@ -114,7 +117,7 @@ const Work = ({ changeThemeRef2 }) => {
             hoveredAtAll={hoveredCard}
           />
           <SmallWorkCard
-            title="SCF Analysis Tool"
+            title="planet longhorn"
             tags={["UI/UX Design", "Full-Stack Development"]}
             description="I design and develop user centered digital products, ecommerce and brand communication solutions."
             imageSrc={pl}
@@ -147,8 +150,8 @@ const Work = ({ changeThemeRef2 }) => {
           />
         </div>
       </div>
-      <Link href="/work" className={`${styles.moreWork} ${styles.button}`}>
-        more work <div className={styles.bounds}></div>
+      <Link ref={footerStick} href="/work" className={`${styles.moreWork} ${styles.button}`}>
+        <span>More work</span> <div className={styles.bounds}></div>
       </Link>
     </div>
   );

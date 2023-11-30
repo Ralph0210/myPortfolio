@@ -8,6 +8,7 @@ import SplitType from "split-type";
 import { useScroll } from "framer-motion";
 import pl from '../../public/gallery/pl.png'
 import Image from "next/image";
+import meIcon from '../../public/heroIcon.png'
 gsap.registerPlugin(ScrollTrigger);
 
 const Page = () => {
@@ -128,7 +129,7 @@ const Page = () => {
           start: "top 100%",
           end: "bottom 0%",
           scrub: 0,
-          markers: true,
+          // markers: true,
         }
       })
 
@@ -139,7 +140,7 @@ const Page = () => {
 
 
   return (
-    <>
+    <div style={{position:"relative"}}>
     <div className={styles.div1}></div>
       
       {/* <div className={styles.div2}>
@@ -156,11 +157,18 @@ const Page = () => {
       </div>
       <div className={styles.panel2}></div> */}
 
-      <div ref={newRef} className={styles.imageContainer}>
+      {/* <div ref={newRef} className={styles.imageContainer}>
         <Image ref={imgRef} src={pl} alt="scf" style={{objectFit:"cover", width:"100%", height:"900px", transform: "translateY(-200px)"}}/>
+      </div> */}
+
+      <div className={styles.footerContainer} >
+      <div className={styles.footercta}>
+      <Image src={meIcon} alt="me" width={96} height={96} style={{zIndex:5}}/>
+        <p className={styles.cta}>Lets work <br/>together</p>
       </div>
-      <div className={styles.div1}></div>
-    </>
+    </div>
+    <div className={styles.div2}></div>
+    </div>
   );
 };
 

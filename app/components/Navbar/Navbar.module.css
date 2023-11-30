@@ -1,40 +1,155 @@
-.navbarContainer{
-    max-width: 100%;
-    padding: 3rem 5rem;
-    font-size: 1.6rem;
-    display: flex;
-    justify-content: space-between;
+.navbarContainer {
+  max-width: 100%;
+  padding: 1rem 3rem;
+  font-size: 1.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.navContainer ul{
-    display: flex;
-    gap: 1rem;
-}
-
-.navbarContainer li{
-    padding: 1rem 2rem;
-    list-style: none;
+.homeLinkContainer{
     position: relative;
-    border-radius: 5rem;
+    padding: 1.5rem 2rem;
+}
+
+.homeLinkContainer a {
+  display: flex;
+}
+
+.copyright {
+  margin: 0px;
+  transition: all 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.name {
+  display: flex;
+
+  position: relative;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  margin-left: 5px;
+
+  transition: all 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.name p {
+  position: relative;
+
+  transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.name p:nth-of-type(2){
+    padding-left: 0.3em;
+}
+
+.name p:nth-of-type(3){
+    position: absolute;
+
+    left: 105px;
+
+    padding-left: 0.3em;
+}
+
+.homeLinkContainer:hover{
+    .copyright{
+        transform: rotate(360deg);
+    }
+    .name{
+
+        padding-right: 30px;
+
+        .codeBy{
+
+            transform: translateX(-100%);
+
+        }
+
+        .ralph{
+
+            transform: translateX(-65px);
+
+        }
+
+        .chang{
+
+            transform: translateX(-65px);
+
+        }
+
+    }
+}
+
+.copyright:hover{
+    transform: rotate(360deg);
+}
+
+.name:hover {
+    padding-right: 30px;
+}
+
+
+
+.navContainer ul {
+  display: flex;
+  gap: 1rem;
+}
+
+.navbarContainer li {
+  /* padding: 1rem 2rem; */
+  width: 9rem;
+  height: 5rem;
+  list-style: none;
+  position: relative;
+  border-radius: 5rem;
+}
+
+.navbarContainer li span {
+  position: absolute;
+  display: inline-block;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: max-content;
 }
 
 .bounds {
-    position: absolute;
-  
-    left: 0;
-  
-    top: 0;
-  
-    width: 100%;
-  
-    height: 100%;
-  
-    pointer-events: all;
-    /* border: 1px solid red; */
-    border-radius: 5rem;
-    z-index: 0;
+  position: absolute;
+
+  left: 0;
+
+  top: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  pointer-events: all;
+  /* border: 1px solid red; */
+  border-radius: 5rem;
+  z-index: 0;
+}
+
+.bounds:hover {
+  transform: scale(3);
+}
+
+.navbarContainer li:hover span {
+  animation: letterroll cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+}
+
+@keyframes letterroll {
+  50% {
+    transform: translate(-50%, -75%);
+    opacity: 0;
   }
-  
-  .bounds:hover{
-      transform: scale(3);
+  50.1% {
+    transform: translate(-50%, 75%);
   }
+  100% {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}
