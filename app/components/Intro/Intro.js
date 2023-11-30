@@ -200,15 +200,15 @@ const Intro = ({ ThemeDark, changeThemeRef, changeThemeRef3 }) => {
         </div>
         <div
           className={styles.themeChangeCircle}
-          style={ThemeDark ? { width: "500rem", height: "500rem", opacity: 1 } : {opacity:0}}
+          style={ThemeDark ? { width: "100%", height: "300rem", opacity: 1, borderRadius:0 } : {opacity:0}}
         ></div>
         <div
           className={styles.themeChangeCircle2}
-          style={ThemeDark ? { width: "500rem", height: "500rem", opacity: 1 } : {opacity:0}}
+          style={ThemeDark ? { width: "100%", height: "300rem", opacity: 1, borderRadius:0 } : {opacity:0}}
         ></div>
         <div
           className={styles.themeChangeCircle3}
-          style={ThemeDark ? { width: "500rem", height: "500rem", opacity: 1 } : {opacity:0}}
+          style={ThemeDark ? { width: "100%", height: "300rem", opacity: 1, borderRadius:0 } : {opacity:0}}
         ></div>
         <div
           ref={changeThemeRef}
