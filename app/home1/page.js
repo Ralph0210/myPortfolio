@@ -9,15 +9,101 @@ import { useScroll } from "framer-motion";
 import pl from '../../public/gallery/pl.png'
 import Image from "next/image";
 import meIcon from '../../public/heroIcon.png'
+import Navbar from "../components/Navbar/Navbar";
+import Cursor from "../utils/Cursor";
+import Hero from "../components/Hero/Hero";
+import Intro from "../components/Intro/Intro";
+import Work from "../components/Work/Work";
 gsap.registerPlugin(ScrollTrigger);
+// import LocomotiveScroll from 'locomotive-scroll';
+import Lenis from '@studio-freight/lenis'
+
+// const scroll = new LocomotiveScroll({
+//   el: document.querySelector('[data-scroll-container]'),
+//   smooth: true
+// });
 
 const Page = () => {
+  
+  let scroll
+  const [scrollStop, setScrollStop] = useState(false)
+  const scrollRef = useRef(null);
   const newRef = useRef(null)
   const nameRef = useRef(null)
   const boxRef = useRef(null);
   const boxRef2 = useRef(null);
   const imgRef = useRef(null)
   const tl = useRef()//store timeline in ref so it doesn't recreate when rerender
+
+  useEffect(() => {
+    const lenis = new Lenis({duration: 1.2})
+
+    lenis.on('scroll', e => {
+      // console.log(e)
+    })
+
+    function raf(time) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
+    
+    requestAnimationFrame(raf)
+
+    scrollStop ? lenis.stop() : lenis.start()
+
+    return () => {
+      lenis.destroy()
+    }
+  },[scrollStop])
+
+// useEffect(() => {
+//   scroll = new LocomotiveScroll({
+//     el: document.querySelector('[data-scroll-container]'),
+//     smooth: true
+//   });
+// }, [])
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const LocomotiveScroll = (await import("locomotive-scroll")).default;
+  //     scroll = new LocomotiveScroll({
+  //       el: document.querySelector('[data-scroll-container]'),
+  //       smooth: true,
+  //     });
+  
+  //     // // Cleanup on component unmount
+  //     // return () => {
+  //     //   if (scrollRef.current) {
+  //     //     scrollRef.current.destroy();
+  //     //   }
+  //     // };
+
+  //   })();
+  // }, []);
+
+  // useEffect(() => {
+  //   scrollStop ? scroll.stop() : scroll.start()
+  // }, [scrollStop]);
+
+
+  const handleClick = () => {
+    setScrollStop(!scrollStop)
+    // scroll.scrollTo('bottom')
+    // scroll.destroy()
+  }
+
+
+
+  // useEffect(() => {
+  //   // Toggle scroll events based on sideNavOpened state
+  //   if (scroll) {
+  //     if (scrollStop) {
+  //       scroll.stop(); // Stop scroll events when sideNav is opened
+  //     } else {
+  //       scroll.start(); // Start scroll events when sideNav is closed
+  //     }
+  //   }
+  // }, [scrollStop]);
 
   // const { scrollYProgress, scrollY } = useScroll({
   //   container: newRef.current
@@ -26,7 +112,7 @@ const Page = () => {
   const { scrollYProgress, scrollY } = useScroll()
 
   useEffect(() => {
-    console.log(scrollYProgress, scrollY)
+    // console.log(scrollYProgress, scrollY)
   },[scrollY, scrollYProgress])
 
   const text = 'I am passionate about using technology for meaningful change. I create engaging, delightful, user-centric experiences that empower organizations committed to social responsibility and sustainability.'
@@ -73,7 +159,7 @@ const Page = () => {
         end: "top 30%",
         scrub: 2,
         toggleClass: {targets: boxRef.current, className:styles.boxActive},
-        onUpdate: (self) => console.log(self.progress)
+        // onUpdate: (self) => console.log(self.progress)
       }}
       )
       .to(boxRef.current, {rotate: 360, duration: 2})
@@ -140,34 +226,13 @@ const Page = () => {
 
 
   return (
-    <div style={{position:"relative"}}>
-    <div className={styles.div1}></div>
-      
-      {/* <div className={styles.div2}>
-        // <div ref={boxRef} className={styles.box}></div>
-        <div ref={boxRef2} className={styles.box2}></div>
-      </div> */}
-      {/* <div className={styles.panel1}></div> */}
-      {/* <div ref={boxRef} className={styles.box}></div> */}
-      {/* <div ref={nameRef} className="box">
-      <p ref={nameRef} className='name' style={{fontSize:"2rem"}}>hello I am Ralph</p>
-      {text.split(" ").map((char, index) => (
-        <span className="char" key={index} >{char}</span>
-      ))}
-      </div>
-      <div className={styles.panel2}></div> */}
-
-      {/* <div ref={newRef} className={styles.imageContainer}>
-        <Image ref={imgRef} src={pl} alt="scf" style={{objectFit:"cover", width:"100%", height:"900px", transform: "translateY(-200px)"}}/>
-      </div> */}
-
-      <div className={styles.footerContainer} >
-      <div className={styles.footercta}>
-      <Image src={meIcon} alt="me" width={96} height={96} style={{zIndex:5}}/>
-        <p className={styles.cta}>Lets work <br/>together</p>
-      </div>
-    </div>
-    <div className={styles.div2}></div>
+    <div ref={scrollRef} data-scroll-container style={{width:"100%", height:"100%"}}>
+    <Cursor />
+    <Navbar />
+    <Hero />
+    <button onClick={handleClick}>stop scroll</button>
+    <Work />
+    
     </div>
   );
 };

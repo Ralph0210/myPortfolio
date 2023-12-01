@@ -47,6 +47,7 @@ body {
   max-width: 100vw;
   font-size: 62.5%;
   cursor: none;
+
 }
 
 body {
@@ -57,7 +58,14 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
+    /* position: relative; */
+    /* overflow: hidden; */
+}
+
+body .no-scroll {
+  position: relative;
+  overflow: hidden;
 }
 
 .custom-cursor{

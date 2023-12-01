@@ -23,7 +23,7 @@
     color: var(--background-color);
     margin-right: 2rem;
     flex-wrap: nowrap;
-    transition: margin 0.1s linear;
+    transition: all 0.1s linear;
 }
 
 .arrowContainer{

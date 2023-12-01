@@ -1,0 +1,34 @@
+.sideNavContainer{
+    height: 100%;
+    /* width: 100%; */
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 9;
+    /* background-color: white; */
+    /* transition: opacity 0.5s cubic-bezier(0,.4,.2,1); */
+    opacity: 1;
+    overflow: hidden;
+
+    /* background-color: white; */
+    /* transition: all 0.5s linear; */
+}
+
+.sideNavWrapper{
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background-color: #000;
+    opacity: 0;
+}
+
+.innerContainer{
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 999;
+    height: 100%;
+    background-color: red;
+    opacity: 1;
+    /* transition: width 0.5s cubic-bezier(0,.4,.2,1); */
+}

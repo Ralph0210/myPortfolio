@@ -153,3 +153,28 @@
     opacity: 1;
   }
 }
+
+
+.sideNavContainer{
+  position: fixed;
+  top: 5%;
+  right: 3%;
+  background-color: white;
+  mix-blend-mode: difference;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5rem;
+  padding: 1rem;
+  width: auto;
+  height: auto;
+  transition: all 0.8s ease;
+  
+}
+
+.menu{
+  font-size: 3rem;
+  position: relative;
+}
+

@@ -8,7 +8,7 @@ import stylesNav from "../components/Navbar/Navbar.module.css";
 import stylesFooter from "../components/Footer/Footer.module.css";
 import { Icon } from "@iconify/react";
 
-const Cursor = ({ cardRef }) => {
+const Cursor = ({ sideNavOpened }) => {
   
   const [isHoveredButton, setIsHoveredButton] = useState(false);
   const [isHoveredAboutMeCard, setIsHoveredAboutMeCard] = useState(false);
@@ -272,7 +272,7 @@ const Cursor = ({ cardRef }) => {
         aboutMeCard.removeEventListener("mouseenter", onMouseEnterAboutMeCard);
         aboutMeCard.removeEventListener("mouseleave", onMouseLeaveAboutMeCard);}
     };
-  }, [isHoveredButton,isHoveredAboutMeCard, isHoveredNavButton, isHoveredCard, isHoveredWork, isHoveredArrow, isHoveredContactsCard, isCopied]);
+  }, [sideNavOpened, isHoveredButton,isHoveredAboutMeCard, isHoveredNavButton, isHoveredCard, isHoveredWork, isHoveredArrow, isHoveredContactsCard, isCopied]);
 
   return (
     <div id="custom-cursor" className="custom-cursor">
